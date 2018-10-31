@@ -1,0 +1,47 @@
+rails new recipe_box
+
+rails g controller recipes
+routes.rb
+  resources :recipes
+  root “recipes#index”
+
+recipes_controller.rb
+  def index
+  end
+
+rails g model Recipe title:string description:text user_id:integer
+rake db:migrate
+
+rails g simple_form:install
+rails g simple_form:install --bootstrap
+
+rails g paperclip recipe image
+rake db:migrate
+
+rails g model Ingredient name:string recipe:belongs_to
+rails g model Direction step:text recipe:belongs_to
+rake db:migrate
+
+rails c
+@recipe = Recipe.new
+@recipe = current_user.recipes.build
+@recipe = Recipe.last
+
+@user = User.first
+@recipe = Recipe.first
+@recipe.user = @user
+@recipe.save
+@recipe = Recipe.find(8)
+@recipe.user = @user
+@recipe.save
+
+
+
+
+
+
+
+
+
+
+
